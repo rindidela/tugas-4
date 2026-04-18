@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>AJAX jQuery</title>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -13,9 +14,31 @@
 
 <script>
 $(document).ready(function() {
+
     $("#changeBtn").click(function() {
-        $("#demo").load("ajax_info.txt");
+
+        console.log("Tombol diklik"); 
+
+        $.ajax({
+            url: "ajax_info.txt",
+            type: "GET",
+            dataType: "html",
+
+            success: function(result) {
+                $("#demo").html(result);
+            },
+
+            error: function(xhr, status, error) {
+                $("#demo").html("Error: " + error);
+            },
+
+            complete: function(xhr, status) {
+                console.log("Request completed: " + status);
+            }
+        });
+
     });
+
 });
 </script>
 
